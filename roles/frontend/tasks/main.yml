@@ -5,7 +5,7 @@
 
 - name: Start nginx
   ansible.builtin.service:
-    name: Nginx
+    name: nginx
     state: started
 
 - name: Remove previous web content
