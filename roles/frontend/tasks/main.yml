@@ -2,3 +2,36 @@
   ansible.builtin.yum:
     name: nginx
     state: installed
+
+- name: Start nginx
+  ansible.builtin.service:
+    name: Nginx
+    state: started
+
+- name: Remove previous web content
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    state: absent
+
+- name: Unzip nginx web content
+  ansible.builtin.unarchive:
+    src: https://github.com/roboshop-devops-project/frontend/archive/main.zip
+    dest: /tmp
+    remote_src: yes
+
+- name: Copy nginx web content
+  ansible.builtin.copy:
+    src: /tmp/frontend-main/static/
+    dest: /usr/share/nginx/html/
+    remote_src: yes
+
+
+
+
+  #mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf &>> /tmp/frontend
+  #StatusCheck $?
+
+  #echo Starting Nginx Service
+  #systemctl enable nginx &>>LOG_FILE
+  #systemctl restart nginx &>>LOG_FILE
+  #StatusCheck $?
