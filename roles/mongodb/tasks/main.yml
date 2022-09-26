@@ -75,4 +75,3 @@
 #      login_user: user
 #      login_password: secret
 #      file: "/path/to/mongo/file.js"
-#      idempotent: yes
