@@ -3,11 +3,6 @@
     name: nginx
     state: installed
 
-- name: Start nginx
-  ansible.builtin.service:
-    name: nginx
-    state: started
-
 - name: Remove previous web content
   ansible.builtin.file:
     path: /usr/share/nginx/html
@@ -29,6 +24,12 @@
   ansible.builtin.copy:
     src: roboshop.conf
     dest: /etc/nginx/default.d/roboshop.conf
+
+- name: Start nginx
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
+    enabled: yes
 
 
   #mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf &>> /tmp/frontend
