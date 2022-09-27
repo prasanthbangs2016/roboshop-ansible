@@ -1,0 +1,15 @@
+- name: Download NodeJS package
+  ansible.builtin.shell: https://rpm.nodesource.com/setup_lts.x | bash
+
+- name: Installing the package
+  ansible.builtin.yum:
+    name: nodejs
+    state: installed
+
+- name: Import app-prereq task
+  ansible.builtin.import_tasks: app-prereq.yml
+
+- name: Installing NodeJS dependencies
+  community.general.npm:
+    path: /home/roboshop/{{COMPONENT}}
+  become_user: roboshop
